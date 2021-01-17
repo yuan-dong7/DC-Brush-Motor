@@ -18,11 +18,12 @@ typedef struct {
     float Integral_max;                     //积分项所能累加的最大值(warining:该值应该设为正值)
     float Integral;                         //积分项I
     float Differential;                     //微分项D
+    float Differ;                           //当前滤波后的输出值
+    float Differ_l;                         //用于记录上次的滤波输出值
     float filter_parameter;                 //一阶低通滤波系数
 
 } pid_parameter;
 
-void pid_init(pid_parameter *pid);
 float pid_Integral(pid_parameter *pid);
 float pid_Differential(pid_parameter *pid);
 float pid_calculate(pid_parameter *pid);
