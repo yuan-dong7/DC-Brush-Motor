@@ -11,12 +11,12 @@
 //  Sample usage:               无需用户调用，用户请使用h文件中的宏定义
 //-------------------------------------------------------------------------------------------------------------------
 void pid_Integral(pid_parameter *pid) {
-    pid->Integral = pid->Integral + (float) (pid->error - pid->error_l) / (float) 2;           /*梯形积分的计算*/
+    pid->Integral = pid->Integral + (float) (pid->error - pid->error_l) / (float) 2;             /*梯形积分的计算*/
     /*抗积分饱和算法*/
     if (Ufabs(pid->Integral) > pid->Integral_max && pid->Integral > 0) {
         pid->Integral = pid->Integral_max;
     } else if (Ufabs(pid->Integral) > pid->Integral_max && pid->Integral < 0) {               /*积分饱和过冲时累加负项  */
-        pid->Integral = -1.0f * pid->Integral_max;                                       /*可使积分项快速退出饱和区*/
+        pid->Integral = -1.0f * pid->Integral_max;                                               /*可使积分项快速退出饱和区*/
     }
 }
 
@@ -45,6 +45,7 @@ float pid_calculate(pid_parameter *pid) {
     pid_Integral(pid);
     pid_Differential(pid);
     pid->output = (float) (pid->kp * pid->error + pid->ki * pid->Integral + pid->kd * pid->Differential);
+    /*对pid输出量进行限幅*/
     if (pid->output > pid->output_max) {
         pid->output = pid->output_max;
     } else if (pid->output < pid->output_min) {
