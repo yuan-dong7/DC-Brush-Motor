@@ -8,4 +8,6 @@ void Delayus(unsigned int xus);
 unsigned short FloatToInt16(float data0);
 float Int16ToFloat(unsigned short data0);
 
+extern float Curve[];
+
 #endif /* _SYSTEM_H_ */

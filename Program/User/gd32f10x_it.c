@@ -2,6 +2,9 @@
 #include "system.h"
 #include "can_package.h"
 #include "decrypt.h"
+#include "encrypt.h"
+
+float Curve[4];
 
 void USB_LP_CAN1_RX0_IRQHandler(void) {
     can_receive_message_struct receive_message;
@@ -19,8 +22,15 @@ void USART1_IRQHandler(void) {
 
 void TIM2_IRQHandler(void) {
     if (SET == timer_interrupt_flag_get(TIMER1, TIMER_INT_UP)) {
+        DTP_Package_t pkg = {0};
+        char counter;
         timer_interrupt_flag_clear(TIMER1, TIMER_INT_UP);
-
+        pkg.PID = 0;
+        for (counter = 0; counter < 4; counter++) {
+            pkg.Data[counter * 2] = FloatToInt16(Curve[counter]) >> 8;
+            pkg.Data[counter * 2 + 1] = FloatToInt16(Curve[counter]) & 0x00FF;
+        }
+        DTP_Transmit(&pkg);
     }
 }
 
