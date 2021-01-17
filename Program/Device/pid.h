@@ -24,8 +24,8 @@ typedef struct {
 
 } pid_parameter;
 
-float pid_Integral(pid_parameter *pid);
-float pid_Differential(pid_parameter *pid);
+void pid_Integral(pid_parameter *pid);
+void pid_Differential(pid_parameter *pid);
 float pid_calculate(pid_parameter *pid);
 
 #endif //_DEVICE_PID_H_
