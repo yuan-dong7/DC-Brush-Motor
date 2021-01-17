@@ -15,15 +15,16 @@ typedef struct {
     float actual_value;                     //当前值
     float output;                           //pid计算后最终的输出值
     float output_max, output_min;           //输出值的最大/最小值
-    float integral_max;                     //积分项所能累加的最大值(warining:该值应该设为正值)
-    float integral;                         //积分项I
-    float differential;                     //微分项D
+    float Integral_max;                     //积分项所能累加的最大值(warining:该值应该设为正值)
+    float Integral;                         //积分项I
+    float Differential;                     //微分项D
+    float filter_parameter;                 //一阶低通滤波系数
 
 } pid_parameter;
 
 void pid_init(pid_parameter *pid);
-float pid_integral();
-float pid_differential();
+float pid_Integral(pid_parameter *pid);
+float pid_Differential(pid_parameter *pid);
 float pid_calculate(pid_parameter *pid);
 
 #endif //_DEVICE_PID_H_
