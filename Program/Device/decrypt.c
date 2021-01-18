@@ -5,7 +5,7 @@
 static unsigned char Receive_Buffer[128];
 static unsigned char PingPong_Buffer[128];
 unsigned int Receive_BufCounter = 0;
-float Parameters[4];
+volatile float Parameters[4];
 
 void Receive_CallBack(unsigned char PID, unsigned char Data[8]) {
     if (PID == 0) {

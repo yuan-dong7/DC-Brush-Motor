@@ -4,7 +4,7 @@
 #include "decrypt.h"
 #include "encrypt.h"
 
-float Curve[4];
+volatile float Curve[4];
 
 void USB_LP_CAN1_RX0_IRQHandler(void) {
     can_receive_message_struct receive_message;
