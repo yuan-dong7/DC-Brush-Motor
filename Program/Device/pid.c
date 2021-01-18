@@ -54,3 +54,10 @@ float pid_calculate(pid_parameter *pid) {
     pid->error_l = pid->error;
     return pid->output;
 }
+
+float filter_low_pass(pid_parameter *pid) {
+
+    pid->Differ = pid->filter_parameter * pid->actual_value + (1.0 - pid->filter_parameter) * pid->Differ_l;
+    pid->Differ_l = pid->Differ;
+    return pid->Differ;
+}

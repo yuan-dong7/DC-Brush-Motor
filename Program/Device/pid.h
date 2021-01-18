@@ -28,4 +28,5 @@ void pid_Integral(pid_parameter *pid);
 void pid_Differential(pid_parameter *pid);
 float pid_calculate(pid_parameter *pid);
 
+float filter_low_pass(pid_parameter *pid);
 #endif //_DEVICE_PID_H_
