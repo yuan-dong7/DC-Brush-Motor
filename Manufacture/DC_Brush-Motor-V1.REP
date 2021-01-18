@@ -2,30 +2,59 @@
 FileName = DC_Brush-Motor-V1.GBR
 AutoAperture = True
 *************************************************************
-Generating : Mechanical 12
-      File : DC_Brush-Motor-V1.GM12
+Generating : Drill Drawing
+      File : DC_Brush-Motor-V1.GD1
 
-    Adding Layer      : Mechanical 12
+    Adding Layer      : Mechanical 1
 
+    Adding Drill Pair : Top Layer-Bottom Layer
 
-Used DCodes :
-    D82
-*************************************************************
-
-*************************************************************
-Generating : Bottom Paste
-      File : DC_Brush-Motor-V1.GBP
-
-    Adding Layer      : Bottom Paste
-
-    Adding Layer      : Bottom Layer
-
-    Adding Layer      : Multi-Layer
+    Adding Layer      : Drill Drawing
 
 
 Used DCodes :
-    D29
-    D79
+    D87
+    D88
+*************************************************************
+
+*************************************************************
+Generating : Drill Guide
+      File : DC_Brush-Motor-V1.GG1
+
+    Adding Layer      : Mechanical 1
+
+    Adding Drill Pair : Top Layer-Bottom Layer
+
+    Adding Layer      : Drill Guide
+
+
+Used DCodes :
+    D87
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 1
+      File : DC_Brush-Motor-V1.GM1
+
+    Adding Layer      : Mechanical 1
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
+*************************************************************
+
+*************************************************************
+Generating : Keep-Out Layer
+      File : DC_Brush-Motor-V1.GKO
+
+    Adding Layer      : Keep-Out Layer
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
+    D12
 *************************************************************
 
 *************************************************************
@@ -36,11 +65,41 @@ Generating : Bottom Pad Master
 
     Adding Layer      : Multi-Layer
 
+    Adding Layer      : Mechanical 1
+
 
 Used DCodes :
-    D29
-    D76
-    D79
+    D33
+    D77
+    D80
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 15
+      File : DC_Brush-Motor-V1.GM15
+
+    Adding Layer      : Mechanical 15
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
+    D16
+    D85
+    D86
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 12
+      File : DC_Brush-Motor-V1.GM12
+
+    Adding Layer      : Mechanical 12
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
+    D83
 *************************************************************
 
 *************************************************************
@@ -48,6 +107,8 @@ Generating : Top Overlay
       File : DC_Brush-Motor-V1.GTO
 
     Adding Layer      : Top Overlay
+
+    Adding Layer      : Mechanical 1
 
 
 Used DCodes :
@@ -65,203 +126,19 @@ Used DCodes :
 *************************************************************
 
 *************************************************************
-Generating : Bottom Overlay
-      File : DC_Brush-Motor-V1.GBO
-
-    Adding Layer      : Bottom Overlay
-
-
-Used DCodes :
-    D11
-    D16
-*************************************************************
-
-*************************************************************
-Generating : Top Pad Master
-      File : DC_Brush-Motor-V1.GPT
-
-    Adding Layer      : Top Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D21
-    D22
-    D23
-    D24
-    D25
-    D26
-    D27
-    D28
-    D29
-    D30
-    D31
-    D32
-    D33
-    D34
-    D35
-    D36
-    D37
-    D38
-    D39
-    D40
-    D41
-    D42
-    D43
-    D44
-    D45
-    D76
-*************************************************************
-
-*************************************************************
-Generating : Mechanical 15
-      File : DC_Brush-Motor-V1.GM15
-
-    Adding Layer      : Mechanical 15
-
-
-Used DCodes :
-    D16
-    D84
-    D85
-*************************************************************
-
-*************************************************************
-Generating : Top Paste
-      File : DC_Brush-Motor-V1.GTP
-
-    Adding Layer      : Top Paste
-
-    Adding Layer      : Top Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D21
-    D22
-    D23
-    D24
-    D25
-    D26
-    D27
-    D28
-    D29
-    D30
-    D31
-    D32
-    D33
-    D34
-    D35
-    D36
-    D37
-    D38
-    D39
-    D40
-    D41
-    D42
-    D43
-    D44
-    D45
-*************************************************************
-
-*************************************************************
-Generating : Top Layer
-      File : DC_Brush-Motor-V1.GTL
-
-    Adding Layer      : Top Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D12
-    D21
-    D22
-    D23
-    D24
-    D25
-    D26
-    D27
-    D28
-    D29
-    D30
-    D31
-    D32
-    D33
-    D34
-    D35
-    D36
-    D37
-    D38
-    D39
-    D40
-    D41
-    D42
-    D43
-    D44
-    D45
-    D73
-    D74
-    D75
-    D76
-    D77
-    D78
-*************************************************************
-
-*************************************************************
-Generating : Keep-Out Layer
-      File : DC_Brush-Motor-V1.GKO
-
-    Adding Layer      : Keep-Out Layer
-
-
-Used DCodes :
-    D12
-*************************************************************
-
-*************************************************************
-Generating : Bottom Solder
-      File : DC_Brush-Motor-V1.GBS
-
-    Adding Layer      : Bottom Solder
-
-    Adding Layer      : Bottom Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D54
-    D71
-    D72
-    D81
-*************************************************************
-
-*************************************************************
-Generating : Mechanical 1
-      File : DC_Brush-Motor-V1.GM1
-
-    Adding Layer      : Mechanical 1
-
-
-Used DCodes :
-*************************************************************
-
-*************************************************************
 Generating : Top Solder
       File : DC_Brush-Motor-V1.GTS
 
     Adding Layer      : Top Solder
 
+    Adding Layer      : Mechanical 1
+
     Adding Layer      : Top Layer
 
     Adding Layer      : Multi-Layer
 
 
 Used DCodes :
-    D46
     D47
     D48
     D49
@@ -288,6 +165,7 @@ Used DCodes :
     D70
     D71
     D72
+    D73
 *************************************************************
 
 *************************************************************
@@ -296,10 +174,12 @@ Generating : Mechanical 13
 
     Adding Layer      : Mechanical 13
 
+    Adding Layer      : Mechanical 1
+
 
 Used DCodes :
     D16
-    D83
+    D84
 *************************************************************
 
 *************************************************************
@@ -308,45 +188,205 @@ Generating : Bottom Layer
 
     Adding Layer      : Bottom Layer
 
+    Adding Layer      : Mechanical 1
+
     Adding Layer      : Multi-Layer
 
 
 Used DCodes :
+    D10
     D12
-    D29
-    D73
+    D13
+    D33
     D74
-    D76
+    D75
     D77
     D78
     D79
     D80
+    D81
 *************************************************************
 
 *************************************************************
-Generating : Drill Drawing
-      File : DC_Brush-Motor-V1.GD1
+Generating : Top Layer
+      File : DC_Brush-Motor-V1.GTL
 
-    Adding Drill Pair : Top Layer-Bottom Layer
+    Adding Layer      : Top Layer
 
-    Adding Layer      : Drill Drawing
+    Adding Layer      : Mechanical 1
+
+    Adding Layer      : Multi-Layer
 
 
 Used DCodes :
-    D86
-    D87
+    D10
+    D12
+    D13
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+    D42
+    D43
+    D44
+    D45
+    D46
+    D74
+    D75
+    D76
+    D77
+    D78
+    D79
 *************************************************************
 
 *************************************************************
-Generating : Drill Guide
-      File : DC_Brush-Motor-V1.GG1
+Generating : Bottom Overlay
+      File : DC_Brush-Motor-V1.GBO
 
-    Adding Drill Pair : Top Layer-Bottom Layer
+    Adding Layer      : Bottom Overlay
 
-    Adding Layer      : Drill Guide
+    Adding Layer      : Mechanical 1
 
 
 Used DCodes :
-    D86
+    D10
+    D16
+*************************************************************
+
+*************************************************************
+Generating : Bottom Paste
+      File : DC_Brush-Motor-V1.GBP
+
+    Adding Layer      : Bottom Paste
+
+    Adding Layer      : Mechanical 1
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D33
+    D80
+*************************************************************
+
+*************************************************************
+Generating : Bottom Solder
+      File : DC_Brush-Motor-V1.GBS
+
+    Adding Layer      : Bottom Solder
+
+    Adding Layer      : Mechanical 1
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D59
+    D73
+    D82
+*************************************************************
+
+*************************************************************
+Generating : Top Pad Master
+      File : DC_Brush-Motor-V1.GPT
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+    D42
+    D43
+    D44
+    D45
+    D46
+    D77
+*************************************************************
+
+*************************************************************
+Generating : Top Paste
+      File : DC_Brush-Motor-V1.GTP
+
+    Adding Layer      : Top Paste
+
+    Adding Layer      : Mechanical 1
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+    D42
+    D43
+    D44
+    D45
+    D46
 *************************************************************
 
