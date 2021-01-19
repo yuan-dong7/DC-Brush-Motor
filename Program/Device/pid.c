@@ -4,6 +4,8 @@
 
 #include "pid.h"
 
+filter_parameters filter = {0};
+
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      积分项的计算（运用包含抗积分饱和、梯形积分）
 //  @param      pid参数指针
@@ -27,11 +29,10 @@ void pid_Integral(pid_parameter *pid) {
 //  Sample usage:           无需用户调用，用户请使用h文件中的宏定义
 //-------------------------------------------------------------------------------------------------------------------
 void pid_Differential(pid_parameter *pid) {
-    pid->Differ_l = pid->Differ;
-    pid->Differ = (float) ((pid->filter_parameter) * (pid->error)
-        + (1.0 - pid->filter_parameter) * pid->Differ_l);
-    pid->Differential = pid->Differ - pid->Differ_l;
-
+    pid->error_l = pid->error;
+    filter.sampling_value = pid->error;
+    pid->error = low_pass_filter(&filter);
+    pid->Differential = pid->error - pid->error_l;
 }
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -55,9 +56,9 @@ float pid_calculate(pid_parameter *pid) {
     return pid->output;
 }
 
-float filter_low_pass(pid_parameter *pid) {
-
-    pid->Differ = pid->filter_parameter * pid->actual_value + (1.0 - pid->filter_parameter) * pid->Differ_l;
-    pid->Differ_l = pid->Differ;
-    return pid->Differ;
-}
+//float filter_low_pass(pid_parameter *pid) {
+//
+//    pid->Differ = pid->filter_parameter * pid->actual_value + (1.0 - pid->filter_parameter) * pid->Differ_l;
+//    pid->Differ_l = pid->Differ;
+//    return pid->Differ;
+//}

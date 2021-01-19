@@ -5,6 +5,8 @@
 #ifndef _ALGORITHM_PID_H_
 #define _ALGORITHM_PID_H_
 
+#include "filter.h"
+
 #define Ufabs(x) x > 0 ? x : -1 * x         //Ufabs(x)保证输出的值是一个正值，以此值用来与integral_max判断
 
 typedef struct {
