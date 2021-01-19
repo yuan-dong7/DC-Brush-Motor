@@ -1,0 +1,29 @@
+Output: Gerber Files
+Type  : Gerber
+From  : Variant [[No Variations]] of Project [Circuit.PrjPcb]
+   Generated File[DC_Brush-Motor-V1.GTO]
+   Generated File[DC_Brush-Motor-V1.GTP]
+   Generated File[DC_Brush-Motor-V1.GTS]
+   Generated File[DC_Brush-Motor-V1.GTL]
+   Generated File[DC_Brush-Motor-V1.GBL]
+   Generated File[DC_Brush-Motor-V1.GBS]
+   Generated File[DC_Brush-Motor-V1.GBP]
+   Generated File[DC_Brush-Motor-V1.GBO]
+   Generated File[DC_Brush-Motor-V1.GM1]
+   Generated File[DC_Brush-Motor-V1.GM12]
+   Generated File[DC_Brush-Motor-V1.GM13]
+   Generated File[DC_Brush-Motor-V1.GM15]
+   Generated File[DC_Brush-Motor-V1.GKO]
+   Generated File[DC_Brush-Motor-V1.GPT]
+   Generated File[DC_Brush-Motor-V1.GPB]
+   Generated File[DC_Brush-Motor-V1.GD1]
+   Generated File[DC_Brush-Motor-V1.GG1]
+   Generated File[DC_Brush-Motor-V1.RUL]
+   Generated File[DC_Brush-Motor-V1.EXTREP]
+   Generated File[DC_Brush-Motor-V1.REP]
+
+
+Files Generated   : 20
+Documents Printed : 0
+
+Finished Output Generation At 23:33:39 On 2021/1/18
