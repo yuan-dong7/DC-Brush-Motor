@@ -56,7 +56,7 @@ void DTP_Received_CallBack(unsigned char Receive_Byte) {
             PingPong_Buffer[Temp_Var] = Receive_Buffer[EOF_Pos + Temp_Var];
         Receive_BufCounter = Receive_BufCounter - EOF_Pos;
         memset(Receive_Buffer, 0x00, sizeof(Receive_Buffer));
-        for (Temp_Var = 0; Temp_Var < Receive_Byte; Temp_Var++)
+        for (Temp_Var = 0; Temp_Var < Receive_BufCounter; Temp_Var++)
             Receive_Buffer[Temp_Var] = PingPong_Buffer[Temp_Var];
 
         unsigned char PID_Bit = Valid_Buffer[1] >> 4;           //Get The PID Bit
