@@ -5,6 +5,8 @@
 #ifndef PROGRAM_DEVICE_FILTER_H_
 #define PROGRAM_DEVICE_FILTER_H_
 
+#include "user_math.h"
+
 #define Fcutoff 0.05
 
 typedef struct {
@@ -14,10 +16,10 @@ typedef struct {
     float output_last;              //上次滤波结果
 
 
-    double *as, *bs;                //s域中的参数as/bs列表
-    double *az, *bz;                //z域中的参数az/bz列表
+//    double *as, *bs;                //s域中的参数as/bs列表
+//    double *az, *bz;                //z域中的参数az/bz列表
     char list_len;                  //参数列表长度
-    double *data_buff;               //数据缓冲区
+//    double *data_buff;               //数据缓冲区
 
 
 } filter_parameters;
@@ -27,8 +29,6 @@ float Bessel_filter(filter_parameters *filter, char N);
 
 void Bessel(char N, double Cutoff, double *as, double *bs);
 void Bilinear(char N, double *as, double *bs, double *az, double *bz);
-float Bessel_Handle(filter_parameters *filter);
-
-double mypow(double num, double n);
+float Bessel_Handle(double *pdAz, double *pdBz, char nABLen, double dDataIn, double *pdBuf);
 
 #endif //PROGRAM_DEVICE_FILTER_H_

@@ -127,12 +127,14 @@ void Bilinear(char N, double *as, double *bs, double *az, double *bz) {
     Res = RES;
     Res_Save = RES_SAVE;
 
+    /*这里开始为什么会改变as/bs指针的值？*/
     char counting = 0;
     for (counting = 0; counting < N + 1; counting++) {
         Res[counting] = 0;
         Res_Save[counting] = 0;
     }
 
+    /*这里开始为什么会修改az/bz指针的值？*/
     /*初始化az bz*/
     for (Count_Z = 0; Count_Z <= N; Count_Z++) {
         *(az + Count_Z) = 0;
@@ -140,7 +142,7 @@ void Bilinear(char N, double *as, double *bs, double *az, double *bz) {
     }
 
     for (Count = 0; Count <= N; Count++) {
-        /*初始化缓存数组*/
+        /*初始化缓存数组       这里开始为什么会修改az bz的值？*/
         for (Count_Z = 0; Count_Z <= N; Count_Z++) {
             Res[Count_Z] = 0;
             Res_Save[Count_Z] = 0;
@@ -200,27 +202,28 @@ void Bilinear(char N, double *as, double *bs, double *az, double *bz) {
 //  @return     滤波后的输出值
 //  Sample usage:   无需用户调用，用户请使用h文件中的宏定义
 //-------------------------------------------------------------------------------------------------------------------
-float Bessel_Handle(filter_parameters *filter) {
+float Bessel_Handle(double *pdAz, double *pdBz, char nABLen, double dDataIn, double *pdBuf) {
     char i;
     char nALen;
     char nBLen;
     char nBufLen;
-//    double dOut;
-    if (filter->list_len < 1)return 0.0;
+    float dOut;
+
+    if (nABLen < 1)return 0.0;
     //根据参数，自动求取序列有效长度
-    nALen = filter->list_len;
-    for (i = filter->list_len - 1; i; --i) {
-        if (*(filter->az + i) != 0.0)//从最后一个系数判断是否为0
+    nALen = nABLen;
+    for (i = nABLen - 1; i; --i) {
+        if (*(pdAz + i) != 0.0)//从最后一个系数判断是否为0
         {
             nALen = i + 1;
             break;
         }
     }
     if (i == 0) nALen = 0;
-
-    nBLen = filter->list_len;
-    for (i = filter->list_len - 1; i; --i) {
-        if (*(filter->bz + i) != 0.0) {
+    //
+    nBLen = nABLen;
+    for (i = nABLen - 1; i; --i) {
+        if (*(pdBz + i) != 0.0) {
             nBLen = i + 1;
             break;
         }
@@ -232,31 +235,31 @@ float Bessel_Handle(filter_parameters *filter) {
         nBufLen = nBLen;
 
     //滤波：与系数a卷乘
-    filter->output = (*filter->az) * filter->sampling_value;  // a(0) * x(n  )
+    dOut = (*pdAz) * dDataIn;  // a(0) * x(n  )
     //dOut = ( *pdA ) * *(pdBuf + 8574);
     for (i = 1; i < nALen; i++)    // a(i) * x(n-i)
     {
-        filter->output -= *(filter->az + i) * *(filter->data_buff + (nBufLen - 1) - i);
+        dOut -= *(pdAz + i) * *(pdBuf + (nBufLen - 1) - i);
     }
 
     //卷乘结果保存为缓冲序列最后一个
-    *(filter->data_buff + nBufLen - 1) = filter->output;
+    *(pdBuf + nBufLen - 1) = dOut;
 
     //滤波：与系数b卷乘
-    filter->output = 0.0;
+    dOut = 0.0;
     for (i = 0; i < nBLen; i++)    // b(i) * x(n-i)
     {
-        filter->output += *(filter->bz + i) * *(filter->data_buff + (nBufLen - 1) - i);
+        dOut += *(pdBz + i) * *(pdBuf + (nBufLen - 1) - i);
     }
 
     //丢弃缓冲序列中最早的一个数，最后一个数清0
     for (i = 0; i < nBufLen - 1; i++) {
-        *(filter->data_buff + i) = *(filter->data_buff + i + 1);
+        *(pdBuf + i) = *(pdBuf + i + 1);
     }
-    *(filter->data_buff + nBufLen - 1) = 0;
+    *(pdBuf + nBufLen - 1) = 0;
 
     //返回输出值
-    return filter->output;
+    return dOut;
 }
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -266,49 +269,41 @@ float Bessel_Handle(filter_parameters *filter) {
 //  Sample usage:   用户直接调用即可
 //-------------------------------------------------------------------------------------------------------------------
 float Bessel_filter(filter_parameters *filter, char N) {
-    double as[N + 1], bs[N + 1];
+    double AS[N + 1], BS[N + 1];
+    double *as, *bs;
     char count = 0;
     for (count = 0; count < N + 1; count++) {
-        as[count] = 0;
-        bs[count] = 0;
+        AS[count] = 0;
+        BS[count] = 0;
     }
-    filter->as = as;
-    filter->bs = bs;
+    as = AS;
+    bs = BS;
 
-    Bessel(N, Fcutoff, filter->as, filter->bs);
+    Bessel(N, Fcutoff, as, bs);
 
-    double az[N + 1], bz[N + 1];
+    double AZ[N + 1], BZ[N + 1];
+    double *az, *bz;
     for (count = 0; count < N + 1; count++) {
-        az[count] = 0;
-        bz[count] = 0;
+        AZ[count] = 0;
+        BZ[count] = 0;
     }
-    filter->az = az;
-    filter->bz = bz;
+    az = AZ;
+    bz = BZ;
 
-    Bilinear(N, filter->as, filter->bs, filter->az, filter->bz);
+    Bilinear(N, as, bs, az, bz);
 
-    double data_buff[N + 1];
+    double DATA_BUFF[N + 1];
+    double *data_buff;
     for (count = 0; count < N + 1; count++) {
-        data_buff[count] = 0;
-        data_buff[count] = 0;
+        DATA_BUFF[count] = 0;
+        DATA_BUFF[count] = 0;
     }
-    filter->data_buff = data_buff;
+    data_buff = DATA_BUFF;
     filter->list_len = N + 1;
 
-    filter->output = Bessel_Handle(filter);
+    filter->output = Bessel_Handle(az, bz, filter->list_len, filter->sampling_value, data_buff);
     return filter->output;
 }
 
-double mypow(double num, double n) {
-    double value = 1;
-    int i = 1;
-    if (n == 0) {
-        value = 1;
-    } else {
-        while (i++ <= n) {
-            value *= num;
-        }
-    }
-    return value;
-}
+
 
