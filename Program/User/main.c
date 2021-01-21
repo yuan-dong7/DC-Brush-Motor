@@ -1,5 +1,6 @@
 #include "gd32f10x.h"
 #include "main.h"
+//filter_parameters filter = {0};
 
 int main(void) {
     filter_parameters filter = {0};
@@ -22,11 +23,11 @@ int main(void) {
         }
 //        Parameters[0] = pid->goal_value;
 //        Parameters[1] = pid->actual_value;
-        //filter.low_pass_parameter = Parameters[0];
+//        filter.low_pass_parameter = Parameters[0];
 //        Parameters[3] = filter_low_pass(pid);
         Curve[0] = test;
         Curve[1] = filter.sampling_value;
-        Curve[2] = Bessel_filter(&filter);
+        Curve[2] = Bessel_filter(&filter, 2);
         Curve[3] = 0;
         i++;
         Delayms(50);
