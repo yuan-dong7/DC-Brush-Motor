@@ -14,6 +14,8 @@ typedef struct complex_figure {//复数
     double x, y; // real and imaginary parts
 } complex;
 
+float user_max(float a[], int n);
+
 complex user_ComplexMul(complex a, complex b);
 
 complex user_ComplexDiv(complex a, complex b);

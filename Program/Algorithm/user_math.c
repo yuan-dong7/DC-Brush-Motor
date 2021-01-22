@@ -3,6 +3,16 @@
 //
 
 #include "user_math.h"
+
+float user_max(float a[], int n) {
+    int maxnum, i;
+    maxnum = 0;
+    for (i = 0; i < n; i++) {
+        if (a[i] > a[maxnum])
+            maxnum = i;
+    }
+    return maxnum;
+}
 //复数乘
 complex user_ComplexMul(complex a, complex b) {
     complex c;

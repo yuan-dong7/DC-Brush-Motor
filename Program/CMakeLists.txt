@@ -41,12 +41,12 @@ else ()
     add_compile_options(-Og -g)
 endif ()
 
-include_directories(User System FL/Include Device Hardware)
+include_directories(User System FL/Include Device Hardware Algorithm)
 
 add_definitions(-DUSE_HAL_DRIVER -DGD32F10X_MD -DDEBUG)
 
 file(GLOB_RECURSE SOURCES "FL/Source/*.c" "System/*.c" "System/*.s" "User/*.c"
-        "Hardware/*.c" "Device/*.c")
+        "Hardware/*.c" "Device/*.c" "Algorithm/*.c")
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/GD32F103TB_FLASH.ld)
 
