@@ -4,31 +4,35 @@
 
 #ifndef PROGRAM_DEVICE_FILTER_H_
 #define PROGRAM_DEVICE_FILTER_H_
-
-#define Fcutoff 0.05
+#include "user_math.h"
 
 typedef struct {
     float low_pass_parameter;       //一阶低通滤波器滤波系数
     float sampling_value;           //需要滤波的采样值
     float output;                   //当前滤波结果
     float output_last;              //上次滤波结果
-
-
-    double *as, *bs;                //s域中的参数as/bs列表
-    double *az, *bz;                //z域中的参数az/bz列表
-    char list_len;                  //参数列表长度
-    double *data_buff;               //数据缓冲区
-
-
 } filter_parameters;
 
+typedef struct {
+    int N;
+    float Cutoff;
+    float *as;
+    float *bs;
+    float *az;
+    float *bz;
+    float dDataIn;//以数组的形式一个一个的放入数据
+    float *pdBuf;
+} pass_parameters;
+
+typedef struct {     //巴特沃兹滤波器参数
+    double Passband; //通带截止频率
+    double Stopband;//阻带截止频率
+    double Passband_attenuation;//通带衰减As
+    double Stopband_attenuation;//阻带衰减Ap
+} butterworth;
+
 float low_pass_filter(filter_parameters *filter);
-float Bessel_filter(filter_parameters *filter, char N);
-
-void Bessel(char N, double Cutoff, double *as, double *bs);
-void Bilinear(char N, double *as, double *bs, double *az, double *bz);
-float Bessel_Handle(filter_parameters *filter);
-
-double mypow(double num, double n);
+void butterworth_init(pass_parameters *parameter);
+float butterworth_calculate(pass_parameters *parameter);
 
 #endif //PROGRAM_DEVICE_FILTER_H_

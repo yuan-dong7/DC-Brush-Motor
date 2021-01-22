@@ -5,8 +5,11 @@
 #ifndef PROGRAM_DEVICE_USER_MATH_H_
 #define PROGRAM_DEVICE_USER_MATH_H_
 
-#define     pi     ((double)3.1415926)
 #include "math.h"
+
+#define     pi     ((double)3.1415926)
+#define     my_pi     ((float)3.1415926)
+
 typedef struct complex_figure {//复数
     double x, y; // real and imaginary parts
 } complex;

@@ -7,7 +7,7 @@
 
 #include "filter.h"
 
-#define Ufabs(x) x > 0 ? x : -1 * x         //Ufabs(x)保证输出的值是一个正值，以此值用来与integral_max判断
+#define Ufabs(x) (x >= 0 ? x : -1.0 * x)      //Ufabs(x)保证输出的值是一个正值，以此值用来与integral_max判断//少个括号就出问题我也不知道为什么
 
 typedef struct {
     float kp, ki, kd;
@@ -22,13 +22,13 @@ typedef struct {
     float Differential;                     //微分项D
     float Differ;                           //当前滤波后的误差输出值
     float Differ_l;                         //用于记录上次的滤波后的误差输出值
-    float filter_parameter;                 //一阶低通滤波系数
+//    float filter_parameter;                 //一阶低通滤波系数
 
 } pid_parameter;
 
 void pid_Integral(pid_parameter *pid);
-void pid_Differential(pid_parameter *pid);
-float pid_calculate(pid_parameter *pid);
+void pid_Differential(pid_parameter *pid, filter_parameters *filter);
+float pid_calculate(pid_parameter *pid, filter_parameters *filter);
 
 float filter_low_pass(pid_parameter *pid);
 #endif //_DEVICE_PID_H_
