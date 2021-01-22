@@ -98,12 +98,12 @@ float butterworth_calculate(pass_parameters *parameter) {
                 Res_Save[count].y += Res[count - 1].y;
             }
         }
+
     }
     for (count = 0; count <= parameter->N; count++)//Res[i]=a(i),i越大次数越高
     {
         Res[count].x = Res_Save[count].x;
         Res[count].y = Res_Save[count].y;
-
         *(parameter->as + parameter->N - count) = Res[count].x;
     }
     *(parameter->bs + parameter->N) = *(parameter->as + parameter->N);
@@ -195,7 +195,6 @@ float butterworth_calculate(pass_parameters *parameter) {
         }
     }
     if (i == 0) nALen = 0;
-
     nBLen = parameter->N + 1;
     for (i = parameter->N; i; --i) {
         if (*(parameter->bz + i) != 0.0) {
@@ -225,6 +224,7 @@ float butterworth_calculate(pass_parameters *parameter) {
     for (i = 0; i < nBLen; i++)    // b(i) * w(n-i)
     {
         dOut += *(parameter->bz + i) * *(parameter->pdBuf + (nBufLen - 1) - i);
+
     }
 
     //丢弃缓冲序列中最早的一个数, 最后一个数清零
@@ -235,7 +235,6 @@ float butterworth_calculate(pass_parameters *parameter) {
 
     //返回输出值
     return dOut;
-
 }
 
 

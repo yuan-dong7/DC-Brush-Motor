@@ -4,6 +4,7 @@
 
 #ifndef PROGRAM_DEVICE_FILTER_H_
 #define PROGRAM_DEVICE_FILTER_H_
+
 #include "user_math.h"
 
 typedef struct {
@@ -11,6 +12,7 @@ typedef struct {
     float sampling_value;           //需要滤波的采样值
     float output;                   //当前滤波结果
     float output_last;              //上次滤波结果
+
 } filter_parameters;
 
 typedef struct {

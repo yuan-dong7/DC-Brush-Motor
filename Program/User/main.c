@@ -2,6 +2,7 @@
 #include "main.h"
 
 int main(void) {
+
     System_Config();
     CAN_Config();
     GPIO_Config();
@@ -10,6 +11,7 @@ int main(void) {
     DMA_Config();
     ADC_Config();
     TIM_Config();
+
 
 //    //butterworth_test
 //    int ii = 0;
@@ -25,4 +27,6 @@ int main(void) {
 //        Curve[0]=butterworth_calculate(&a);
 //        Delayms(50);
 //    }
+
 }
+
