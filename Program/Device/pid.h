@@ -7,7 +7,7 @@
 
 #include "filter.h"
 
-#define Ufabs(x) (x > 0 ? x : -1 * x)         //Ufabs(x)保证输出的值是一个正值，以此值用来与integral_max判断
+#define Ufabs(x) (x >= 0 ? x : -1.0 * x)      //Ufabs(x)保证输出的值是一个正值，以此值用来与integral_max判断//少个括号就出问题我也不知道为什么
 
 typedef struct {
     float kp, ki, kd;
@@ -23,8 +23,9 @@ typedef struct {
 
 } pid_parameter;
 
-void pid_Integral(pid_parameter *pid);
-void pid_Differential(pid_parameter *pid);
+//extern pid_parameter pid_list;
+extern pid_parameter pid;
+
 float pid_calculate(pid_parameter *pid);
 
 #endif //_DEVICE_PID_H_

@@ -3,15 +3,16 @@
 //
 
 #include "pid.h"
-
-filter_parameters filter = {0};
+filter_parameters filter;
+pid_parameter pid;
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      位置式pid的计算
-//  @param      pid参数指针
+//  @param      pid参数指针(&pid)
 //  @return     output          返回pid计算出来的输出值
 //  Sample usage:   用户直接调用即可
 //-------------------------------------------------------------------------------------------------------------------
+
 float pid_calculate(pid_parameter *pid) {
     pid->error = pid->goal_value - pid->actual_value;
     pid->error_l = pid->error;
@@ -28,9 +29,9 @@ float pid_calculate(pid_parameter *pid) {
     /*微分项的计算*/
     filter.sampling_value = pid->error;
     pid->error = low_pass_filter(&filter);                                                      /*运用了一阶RC低通滤波器*/
+
     pid->Differential = pid->error - pid->error_l;
 
-    /*pid的输出值*/
     pid->output = (float) (pid->kp * pid->error + pid->ki * pid->Integral + pid->kd * pid->Differential);
     /*对pid输出量进行限幅*/
     if (pid->output > pid->output_max) {
