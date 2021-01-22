@@ -3,7 +3,7 @@
 //
 
 #include "filter.h"
-
+butterworth IIR_Filter;
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      一阶RC低通滤波器
 //  @param      filter参数指针
@@ -19,12 +19,11 @@ float low_pass_filter(filter_parameters *filter) {
 
 void butterworth_init(pass_parameters *parameter) {
     float Fcutoff;//转化截止频率
-    int j = 0;
-    butterworth IIR_Filter;
+
     IIR_Filter.
-        Passband = (double) (2 * pi * 0.2);   //[rad]
+        Passband = (float) (2 * pi * 0.2);   //[rad]
     IIR_Filter.
-        Stopband = (double) (2 * pi * 0.25);   //[rad]
+        Stopband = (float) (2 * pi * 0.25);   //[rad]
     IIR_Filter.
         Passband_attenuation = 2;        //[dB]
     IIR_Filter.
@@ -38,20 +37,6 @@ void butterworth_init(pass_parameters *parameter) {
     Fcutoff =
         IIR_Filter.Passband / (mypow((mypow(10, 0.1 * IIR_Filter.Passband_attenuation) - 1), 1.0 / (2 * parameter->N)));
     parameter->Cutoff = Fcutoff;
-    float as[parameter->N + 1], bs[parameter->N + 1], az[parameter->N + 1], bz[parameter->N + 1],
-        data_buffer[parameter->N + 1];
-    for (; j <= parameter->N; j++) {
-        as[j] = bs[j] = az[j] = bz[j] = data_buffer[j] = 0;
-    }
-    parameter->N = 2;
-    parameter->as = as;
-    parameter->bs = bs;
-    parameter->az = az;
-    parameter->bz = bz;
-    parameter->pdBuf = data_buffer;
-}
-
-float butterworth_calculate(pass_parameters *parameter) {
 
     //计算s域系数
     double dk = 0;
@@ -176,9 +161,10 @@ float butterworth_calculate(pass_parameters *parameter) {
         *(parameter->bz + Count_Z) = (*(parameter->bz + Count_Z)) / (*(parameter->az + 0));
         *(parameter->az + Count_Z) = (*(parameter->az + Count_Z)) / (*(parameter->az + 0));
     }
+}
 
-    /*********************************************************输出***************************************************/
-
+float butterworth_calculate(pass_parameters *parameter) {
+    int i = 0;
     int nALen;
     int nBLen;
     int nBufLen;

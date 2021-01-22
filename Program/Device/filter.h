@@ -32,7 +32,6 @@ typedef struct {     //巴特沃兹滤波器参数
     double Stopband_attenuation;//阻带衰减Ap
 } butterworth;
 
-extern filter_parameters filter;
 //extern pass_parameters p_parameters = {0};
 //extern butterworth butter = {0};
 
