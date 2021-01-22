@@ -35,6 +35,7 @@ void TIM2_IRQHandler(void) {
 }
 
 void NMI_Handler(void) {}
+
 void HardFault_Handler(void) { while (1); }
 void MemManage_Handler(void) { while (1); }
 void BusFault_Handler(void) { while (1); }

@@ -15,5 +15,6 @@
 #include "encrypt.h"
 #include "filter.h"
 #include "filter1.h"
+#include "pid.h"
 
 #endif /* MAIN_H */
