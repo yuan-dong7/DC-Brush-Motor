@@ -15,7 +15,10 @@ pid_parameter pid;
 
 float pid_calculate(pid_parameter *pid) {
     pid->error = pid->goal_value - pid->actual_value;
+    pid->d_error=pid->error;
     pid->error_l = pid->error;
+
+
 
     /*积分项的计算*/
     pid->Integral = pid->Integral + (float) (pid->error - pid->error_l) / (float) 2;             /*梯形积分的计算*/
@@ -27,10 +30,11 @@ float pid_calculate(pid_parameter *pid) {
     }
 
     /*微分项的计算*/
-    filter.sampling_value = pid->error;
-    pid->error = low_pass_filter(&filter);                                                      /*运用了一阶RC低通滤波器*/
 
-    pid->Differential = pid->error - pid->error_l;
+    filter.sampling_value = pid->d_error;
+    pid->d_error = low_pass_filter(&filter);                                                       /*运用了一阶RC低通滤波器*/
+    pid->Differential = pid->d_error - pid->d_error_l;
+    pid->d_error_l=pid->d_error;
 
     pid->output = (float) (pid->kp * pid->error + pid->ki * pid->Integral + pid->kd * pid->Differential);
     /*对pid输出量进行限幅*/

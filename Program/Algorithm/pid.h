@@ -13,6 +13,8 @@ typedef struct {
     float kp, ki, kd;
     float error;                            //当前误差(current error)
     float error_l;                          //上次的误差(last current)
+    float d_error;                          //当前误差(current d_error)用于D
+    float d_error_l;                        //上次的误差(last d_current)用于D
     float goal_value;                       //预期值
     float actual_value;                     //当前值
     float output;                           //pid计算后最终的输出值
