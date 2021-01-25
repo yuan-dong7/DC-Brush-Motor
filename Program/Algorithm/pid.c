@@ -3,8 +3,8 @@
 //
 
 #include "pid.h"
-filter_parameters filter;
-pid_parameter pid;
+filter_parameters filter={0};
+pid_parameter pid={0};
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      位置式pid的计算
@@ -16,9 +16,6 @@ pid_parameter pid;
 float pid_calculate(pid_parameter *pid) {
     pid->error = pid->goal_value - pid->actual_value;
     pid->d_error=pid->error;
-    pid->error_l = pid->error;
-
-
 
     /*积分项的计算*/
     pid->Integral = pid->Integral + (float) (pid->error - pid->error_l) / (float) 2;             /*梯形积分的计算*/
@@ -43,7 +40,7 @@ float pid_calculate(pid_parameter *pid) {
     } else if (pid->output < pid->output_min) {
         pid->output = pid->output_min;
     }
-
+    pid->error_l = pid->error;
     return pid->output;
 }
 

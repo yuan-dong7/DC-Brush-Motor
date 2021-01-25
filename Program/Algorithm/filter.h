@@ -13,6 +13,7 @@ typedef struct {
     float output;                   //当前滤波结果
     float output_last;              //上次滤波结果
 } filter_parameters;
+extern  filter_parameters  filter;
 
 typedef struct {
     int N;
@@ -23,7 +24,7 @@ typedef struct {
     float *bz;
     float dDataIn;//以数组的形式一个一个的放入数据
     float *pdBuf;
-} pass_parameters;
+} pass_parameters;  //给巴特沃斯滤波器进行传参
 
 typedef struct {     //巴特沃兹滤波器参数
     double Passband; //通带截止频率
@@ -38,5 +39,6 @@ typedef struct {     //巴特沃兹滤波器参数
 float low_pass_filter(filter_parameters *filter);
 void butterworth_init(pass_parameters *parameter);
 float butterworth_calculate(pass_parameters *parameter);
+float bessel_filter(filter_parameters *filter, char N, float F_cutoff);
 
 #endif //PROGRAM_DEVICE_FILTER_H_
